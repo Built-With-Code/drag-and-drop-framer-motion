@@ -4,7 +4,7 @@ export type Task = {
   completed: boolean;
 };
 
-export const tasks: Task[] = [
+export const taskData: Task[] = [
   {
     id: 1,
     label: "Learn Next.js",

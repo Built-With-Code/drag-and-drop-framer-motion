@@ -1,9 +1,18 @@
 import { Task } from "@/db/tasks";
 import { Checkbox } from "./ui/checkbox";
+import { Reorder, useMotionValue } from "framer-motion";
+import { useRaisedShadow } from "@/lib/use-raised-shadow";
 
 const TaskItem = ({ task }: { task: Task }) => {
+  const y = useMotionValue(0);
+  const boxShadow = useRaisedShadow(y);
+
   return (
-    <div className="items-top flex space-x-2">
+    <Reorder.Item
+      className="items-top flex space-x-2"
+      value={task}
+      style={{ boxShadow, y }}
+    >
       <Checkbox id="terms1" checked={task.completed} />
       <div className="grid gap-1.5 leading-none">
         <label
@@ -13,7 +22,7 @@ const TaskItem = ({ task }: { task: Task }) => {
           {task.label}
         </label>
       </div>
-    </div>
+    </Reorder.Item>
   );
 };
 
