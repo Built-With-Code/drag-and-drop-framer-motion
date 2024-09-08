@@ -3,9 +3,11 @@
 import TaskItem from "@/components/TaskItem";
 import { taskData } from "@/db/tasks";
 import { Reorder } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Home() {
+  const container = useRef(null);
+
   const [tasks, setTasks] = useState(taskData);
 
   return (
@@ -16,9 +18,10 @@ export default function Home() {
           className="space-y-1"
           values={tasks}
           onReorder={setTasks}
+          ref={container}
         >
           {tasks.map((t) => (
-            <TaskItem task={t} key={t.id} />
+            <TaskItem task={t} key={t.id} container={container} />
           ))}
         </Reorder.Group>
       </div>
