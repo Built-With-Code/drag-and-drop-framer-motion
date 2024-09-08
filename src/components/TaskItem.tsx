@@ -1,6 +1,6 @@
 import { Task } from "@/db/tasks";
 import { Checkbox } from "./ui/checkbox";
-import { Reorder, useDragControls, useMotionValue } from "framer-motion";
+import { Reorder, useDragControls } from "framer-motion";
 import { MutableRefObject } from "react";
 
 const TaskItem = ({
@@ -10,7 +10,6 @@ const TaskItem = ({
   task: Task;
   container: MutableRefObject<null>;
 }) => {
-  const y = useMotionValue(0);
   const controls = useDragControls();
 
   return (
