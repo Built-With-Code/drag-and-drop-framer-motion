@@ -13,7 +13,7 @@ export default function Home() {
       <div className="flex flex-col gap-8 w-2/5 min-w-72 border-neutral-100 border-2 rounded-xl p-8 shadow-xl">
         <h1 className="text-4xl font-semibold">Tasks</h1>
         <Reorder.Group
-          className="space-y-4"
+          className="space-y-1"
           values={tasks}
           onReorder={setTasks}
         >

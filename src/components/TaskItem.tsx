@@ -1,23 +1,31 @@
 import { Task } from "@/db/tasks";
 import { Checkbox } from "./ui/checkbox";
-import { Reorder, useMotionValue } from "framer-motion";
-import { useRaisedShadow } from "@/lib/use-raised-shadow";
+import { Reorder, useDragControls, useMotionValue } from "framer-motion";
+import { useDragStyle } from "@/lib/use-drag-style";
 
 const TaskItem = ({ task }: { task: Task }) => {
   const y = useMotionValue(0);
-  const boxShadow = useRaisedShadow(y);
+  const boxShadow = useDragStyle(
+    y,
+    "0px 0px 0px rgba(0,0,0,0.2)",
+    "0px 4px 10px rgba(0,0,0,0.3)"
+  );
+  const scale = useDragStyle(y, 1.0, 1.05);
+  const controls = useDragControls();
 
   return (
     <Reorder.Item
-      className="items-top flex space-x-2 px-3 py-2 bg-white"
+      className="flex items-center gap-2 px-3 py-2 bg-white"
       value={task}
-      style={{ boxShadow, y }}
+      style={{ boxShadow, y, scale }}
+      dragListener={false}
+      dragControls={controls}
     >
-      <Checkbox id="terms1" checked={task.completed} />
-      <div className="grid gap-1.5 leading-none">
+      <Checkbox id={`task-${task.id}`} checked={task.completed} />
+      <div className="flex-1" onPointerDown={(e) => controls.start(e)}>
         <label
-          htmlFor="terms1"
-          className={`text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${
+          htmlFor={`task-${task.id}`}
+          className={`font-normal select-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${
             task.completed ? "line-through text-muted-foreground" : ""
           }`}
         >
