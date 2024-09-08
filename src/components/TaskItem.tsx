@@ -9,7 +9,7 @@ const TaskItem = ({ task }: { task: Task }) => {
 
   return (
     <Reorder.Item
-      className="items-top flex space-x-2"
+      className="items-top flex space-x-2 px-3 py-2 bg-white"
       value={task}
       style={{ boxShadow, y }}
     >
