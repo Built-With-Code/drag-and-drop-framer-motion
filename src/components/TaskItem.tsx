@@ -23,6 +23,7 @@ const TaskItem = ({
       dragListener={false}
       dragControls={controls}
       dragConstraints={container}
+      dragElastic={0.1}
     >
       <Checkbox id={`task-${task.id}`} checked={task.completed} />
       <div className="flex-1" onPointerDown={(e) => controls.start(e)}>
