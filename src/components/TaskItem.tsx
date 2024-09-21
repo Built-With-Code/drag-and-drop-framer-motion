@@ -1,38 +1,21 @@
 import { Task } from "@/db/tasks";
 import { Checkbox } from "./ui/checkbox";
-import { Reorder, useDragControls } from "framer-motion";
-import { MutableRefObject } from "react";
 
 const TaskItem = ({
   task,
   toggleTaskComplete,
-  container,
 }: {
   task: Task;
   toggleTaskComplete: () => void;
-  container: MutableRefObject<null>;
 }) => {
-  const controls = useDragControls();
-
   return (
-    <Reorder.Item
-      className="flex items-center gap-2 px-3 py-2 bg-white"
-      value={task}
-      whileDrag={{
-        scale: 1.05,
-        boxShadow: "0px 4px 10px rgba(0,0,0,0.3)",
-      }}
-      dragListener={false}
-      dragControls={controls}
-      dragConstraints={container}
-      dragElastic={0.1}
-    >
+    <div className="flex items-center gap-2 px-3 py-2 bg-white">
       <Checkbox
         id={`task-${task.id}`}
         checked={task.completed}
         onCheckedChange={toggleTaskComplete}
       />
-      <div className="flex-1" onPointerDown={(e) => controls.start(e)}>
+      <div className="flex-1">
         <label
           htmlFor={`task-${task.id}`}
           className={`font-normal select-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${
@@ -42,7 +25,7 @@ const TaskItem = ({
           {task.label}
         </label>
       </div>
-    </Reorder.Item>
+    </div>
   );
 };
 
