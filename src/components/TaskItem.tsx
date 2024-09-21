@@ -5,9 +5,11 @@ import { MutableRefObject } from "react";
 
 const TaskItem = ({
   task,
+  toggleTaskComplete,
   container,
 }: {
   task: Task;
+  toggleTaskComplete: () => void;
   container: MutableRefObject<null>;
 }) => {
   const controls = useDragControls();
@@ -25,7 +27,11 @@ const TaskItem = ({
       dragConstraints={container}
       dragElastic={0.1}
     >
-      <Checkbox id={`task-${task.id}`} checked={task.completed} />
+      <Checkbox
+        id={`task-${task.id}`}
+        checked={task.completed}
+        onCheckedChange={toggleTaskComplete}
+      />
       <div className="flex-1" onPointerDown={(e) => controls.start(e)}>
         <label
           htmlFor={`task-${task.id}`}
